@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Valentine Alya 💖</title>
 
   <style>
@@ -26,7 +26,7 @@
       border-radius: 25px;
       text-align: center;
       box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-      animation: fade 0.5s ease;
+      animation: fade 0.4s ease;
     }
 
     .slide.active {
@@ -41,6 +41,7 @@
     h1 {
       color: #ff4d6d;
       font-size: 22px;
+      margin-bottom: 10px;
     }
 
     p {
@@ -66,13 +67,19 @@
       cursor: pointer;
       background: #ff4d6d;
       color: white;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
-    .btn-no {
+    .no {
       background: #ccc;
       color: #666;
       cursor: not-allowed;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 8px;
     }
   </style>
 </head>
@@ -82,34 +89,50 @@
     <h1>Hai Alya 💕</h1>
     <p>Ada sesuatu yang mau aku sampaikan…</p>
     <button onclick="next()">Lanjut ➡️</button>
+    <div class="hint">atau geser layar ➡️</div>
   </div>
 
   <div class="slide">
-    <p>Sejak kenal kamu…</p>
-    <p>hari-hariku jadi lebih berwarna ✨</p>
+    <p>Sejak aku kenal kamu…</p>
+    <p>dunia aku jadi lebih berwarna ✨</p>
     <button onclick="next()">Lanjut ➡️</button>
   </div>
 
   <div class="slide">
-    <p>Aku suka caramu ketawa 😊</p>
-    <p>aku suka caramu jadi diri sendiri</p>
+    <p>Aku suka caramu tertawa 😊</p>
+    <p>dan caramu jadi diri sendiri</p>
+    <button onclick="next()">Lanjut ➡️</button>
+  </div>
+
+  <div class="slide">
+    <p>Kadang aku mikir…</p>
+    <p>kok bisa ya ada orang sehangat kamu 💗</p>
     <button onclick="next()">Lanjut ➡️</button>
   </div>
 
   <div class="slide">
     <p>Makanya hari ini…</p>
-    <p>aku mau jujur sama perasaanku 💗</p>
+    <p>aku mau jujur sama perasaanku 💌</p>
+    <button onclick="next()">Lanjut ➡️</button>
+  </div>
+
+  <div class="slide">
+    <p>Aku harap…</p>
+    <p>kamu bisa senyum pas baca ini 😊</p>
     <button onclick="next()">Lanjut ➡️</button>
   </div>
 
   <div class="slide">
     <h1>Alya Fathika 💖</h1>
     <p>Maukah kamu jadi Valentine aku?</p>
+    <button onclick="next()">Lanjut ➡️</button>
+  </div>
 
+  <div class="slide">
     <img src="foto.jpg">
-
+    <p>Aku tunggu jawaban kamu 💗</p>
     <button onclick="yesClick()">YES 💘</button><br>
-    <button class="btn-no" disabled>NO ❌</button>
+    <button class="no" disabled>NO ❌</button>
   </div>
 
   <audio id="music">
@@ -117,21 +140,35 @@
   </audio>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      let current = 0;
-      const slides = document.querySelectorAll(".slide");
+    let current = 0;
+    const slides = document.querySelectorAll(".slide");
+    let startX = 0;
 
-      window.next = function () {
-        slides[current].classList.remove("active");
-        current++;
-        slides[current].classList.add("active");
-      };
+    function showSlide(index) {
+      slides[current].classList.remove("active");
+      current = index;
+      slides[current].classList.add("active");
+    }
 
-      window.yesClick = function () {
-        document.getElementById("music").play();
-        alert("Makasih ya sudah bilang YES 🥰💖");
-      };
+    function next() {
+      if (current < slides.length - 1) {
+        showSlide(current + 1);
+      }
+    }
+
+    document.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
     });
+
+    document.addEventListener("touchend", e => {
+      let endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) next();
+    });
+
+    function yesClick() {
+      document.getElementById("music").play();
+      alert("Makasih ya sudah bilang YES 🥰💖");
+    }
   </script>
 
 </body>
