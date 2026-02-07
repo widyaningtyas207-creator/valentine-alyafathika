@@ -26,7 +26,7 @@
       border-radius: 25px;
       text-align: center;
       box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-      animation: fade 0.6s ease;
+      animation: fade 0.5s ease;
     }
 
     .slide.active {
@@ -41,13 +41,12 @@
     h1 {
       color: #ff4d6d;
       font-size: 22px;
-      margin-bottom: 10px;
     }
 
     p {
       color: #555;
       font-size: 14px;
-      margin-bottom: 15px;
+      margin: 12px 0;
     }
 
     img {
@@ -79,43 +78,37 @@
 </head>
 <body>
 
-  <!-- SLIDE 1 -->
   <div class="slide active">
     <h1>Hai Alya 💕</h1>
     <p>Ada sesuatu yang mau aku sampaikan…</p>
     <button onclick="next()">Lanjut ➡️</button>
   </div>
 
-  <!-- SLIDE 2 -->
   <div class="slide">
     <p>Sejak kenal kamu…</p>
     <p>hari-hariku jadi lebih berwarna ✨</p>
     <button onclick="next()">Lanjut ➡️</button>
   </div>
 
-  <!-- SLIDE 3 -->
   <div class="slide">
     <p>Aku suka caramu ketawa 😊</p>
     <p>aku suka caramu jadi diri sendiri</p>
     <button onclick="next()">Lanjut ➡️</button>
   </div>
 
-  <!-- SLIDE 4 -->
   <div class="slide">
     <p>Makanya hari ini…</p>
     <p>aku mau jujur sama perasaanku 💗</p>
     <button onclick="next()">Lanjut ➡️</button>
   </div>
 
-  <!-- SLIDE 5 -->
   <div class="slide">
     <h1>Alya Fathika 💖</h1>
     <p>Maukah kamu jadi Valentine aku?</p>
 
-    <img src="foto.jpg" alt="Alya">
+    <img src="foto.jpg">
 
-    <button onclick="yesClick()">YES 💘</button>
-    <br>
+    <button onclick="yesClick()">YES 💘</button><br>
     <button class="btn-no" disabled>NO ❌</button>
   </div>
 
@@ -124,19 +117,21 @@
   </audio>
 
   <script>
-    let current = 0;
-    const slides = document.querySelectorAll(".slide");
+    document.addEventListener("DOMContentLoaded", function () {
+      let current = 0;
+      const slides = document.querySelectorAll(".slide");
 
-    function next() {
-      slides[current].classList.remove("active");
-      current++;
-      slides[current].classList.add("active");
-    }
+      window.next = function () {
+        slides[current].classList.remove("active");
+        current++;
+        slides[current].classList.add("active");
+      };
 
-    function yesClick() {
-      document.getElementById("music").play();
-      alert("Makasih ya sudah bilang YES 🥰💖");
-    }
+      window.yesClick = function () {
+        document.getElementById("music").play();
+        alert("Makasih ya sudah bilang YES 🥰💖");
+      };
+    });
   </script>
 
 </body>
